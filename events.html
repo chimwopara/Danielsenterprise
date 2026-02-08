@@ -6,15 +6,128 @@
     <title>Events & Calendar | Daniel's Enterprise</title>
     <meta name="description" content="View upcoming events, workshops, and training sessions at Daniel's Enterprise.">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+    <!-- Updated Favicon -->
+    <link rel="icon" href="assets/logo/logo.png">
+    <style>
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000; /* Higher than header */
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.95);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.open {
+            display: block;
+            opacity: 1;
+        }
+
+        .lightbox__content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            animation-name: zoom;
+            animation-duration: 0.3s;
+        }
+
+        @keyframes zoom {
+            from {transform:scale(0.95); opacity: 0;} 
+            to {transform:scale(1); opacity: 1;}
+        }
+
+        .lightbox__close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 2001;
+            line-height: 1;
+        }
+
+        .lightbox__close:hover,
+        .lightbox__close:focus {
+            color: var(--color-gold);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .lightbox__caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+            font-family: var(--font-body);
+        }
+
+        /* Indicate clickability on event images */
+        .lightbox-trigger {
+            cursor: zoom-in;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .lightbox-trigger:hover {
+            filter: brightness(1.1);
+            transform: scale(1.02);
+        }
+        
+        /* Ensure the card doesn't crop the scaling effect too harshly */
+        .card:has(.lightbox-trigger) {
+            overflow: hidden; 
+        }
+
+        /* Gallery Grid Styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        @media (min-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            .gallery-grid img {
+                height: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="header__inner">
             <a href="index.html" class="logo">
-                <div class="logo__icon">D</div>
-                <div class="logo__text">Daniel's <span>Enterprise</span></div>
+                <!-- Header Logo -->
+                <img src="assets/logo/logo.png" alt="Daniel's Enterprise" style="height: 50px; width: auto;">
             </a>
             <nav class="nav" id="mainNav">
                 <a href="index.html" class="nav__link">Home</a>
@@ -40,144 +153,23 @@
         </div>
     </section>
 
-    <!-- Featured Event -->
+    <!-- Upcoming Events (Empty State) -->
     <section class="section">
         <div class="container">
             <div class="section-header">
-                <span class="section-header__tag">Featured Event</span>
-                <h2 class="section-header__title">Don't Miss Out</h2>
-            </div>
-            <div class="card" style="background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-deep) 100%); padding: 60px;">
-                <div class="two-col" style="gap: 48px;">
-                    <div>
-                        <span style="display: inline-block; padding: 6px 16px; background: rgba(201, 162, 39, 0.2); color: var(--color-gold); font-size: 0.85rem; font-weight: 600; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 20px;">Upcoming</span>
-                        <h3 style="color: white; font-size: 2rem; margin-bottom: 16px;">Annual Marketplace Summit 2025</h3>
-                        <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; margin-bottom: 24px;">Our flagship annual event bringing together business leaders, trades professionals, and emerging talent for a day of learning, networking, and inspiration.</p>
-                        <div style="display: flex; gap: 32px; margin-bottom: 32px;">
-                            <div>
-                                <div style="color: var(--color-gold); font-weight: 600;">Date</div>
-                                <div style="color: white;">March 15, 2025</div>
-                            </div>
-                            <div>
-                                <div style="color: var(--color-gold); font-weight: 600;">Time</div>
-                                <div style="color: white;">9:00 AM - 5:00 PM</div>
-                            </div>
-                            <div>
-                                <div style="color: var(--color-gold); font-weight: 600;">Location</div>
-                                <div style="color: white;">Toronto Convention Centre</div>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="btn btn--primary">Register Now</a>
-                    </div>
-                    <div style="display: flex; align-items: center; justify-content: center;">
-                        <div style="width: 200px; height: 200px; background: rgba(201, 162, 39, 0.2); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                            <div style="font-family: var(--font-display); font-size: 4rem; font-weight: 700; color: var(--color-gold); line-height: 1;">15</div>
-                            <div style="color: white; text-transform: uppercase; letter-spacing: 0.1em;">March</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Upcoming Events -->
-    <section class="section section--cream">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-header__tag">What's Coming</span>
+                <span class="section-header__tag">Calendar</span>
                 <h2 class="section-header__title">Upcoming Events</h2>
             </div>
-            <div style="display: flex; flex-direction: column; gap: 24px;">
-                <div class="event-card">
-                    <div class="event-card__date">
-                        <span class="event-card__day">22</span>
-                        <span class="event-card__month">Feb</span>
-                    </div>
-                    <div class="event-card__content">
-                        <h4 class="event-card__title">Business Foundations Program - Info Session</h4>
-                        <div class="event-card__meta">
-                            <span>📍 Virtual (Zoom)</span>
-                            <span>🕐 7:00 PM - 8:30 PM</span>
-                        </div>
-                        <p class="event-card__text">Learn about our 8-week business foundations program. Meet the instructors, hear from past participants, and get your questions answered.</p>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <div class="event-card__date">
-                        <span class="event-card__day">01</span>
-                        <span class="event-card__month">Mar</span>
-                    </div>
-                    <div class="event-card__content">
-                        <h4 class="event-card__title">Trades Workshop: Safety Certification Prep</h4>
-                        <div class="event-card__meta">
-                            <span>📍 Daniel's Enterprise Hub</span>
-                            <span>🕐 9:00 AM - 4:00 PM</span>
-                        </div>
-                        <p class="event-card__text">Comprehensive workshop preparing trades professionals for safety certification exams. Hands-on training and exam strategies included.</p>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <div class="event-card__date">
-                        <span class="event-card__day">08</span>
-                        <span class="event-card__month">Mar</span>
-                    </div>
-                    <div class="event-card__content">
-                        <h4 class="event-card__title">Youth Career Fair</h4>
-                        <div class="event-card__meta">
-                            <span>📍 Community Center</span>
-                            <span>🕐 10:00 AM - 3:00 PM</span>
-                        </div>
-                        <p class="event-card__text">Connect young people with local employers, apprenticeship opportunities, and career resources. Open to ages 16-24.</p>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <div class="event-card__date">
-                        <span class="event-card__day">15</span>
-                        <span class="event-card__month">Mar</span>
-                    </div>
-                    <div class="event-card__content">
-                        <h4 class="event-card__title">Annual Marketplace Summit 2025</h4>
-                        <div class="event-card__meta">
-                            <span>📍 Toronto Convention Centre</span>
-                            <span>🕐 9:00 AM - 5:00 PM</span>
-                        </div>
-                        <p class="event-card__text">Our flagship annual event with keynote speakers, breakout sessions, networking opportunities, and celebration of community achievements.</p>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <div class="event-card__date">
-                        <span class="event-card__day">22</span>
-                        <span class="event-card__month">Mar</span>
-                    </div>
-                    <div class="event-card__content">
-                        <h4 class="event-card__title">Leadership Excellence - Program Launch</h4>
-                        <div class="event-card__meta">
-                            <span>📍 Daniel's Enterprise Hub</span>
-                            <span>🕐 6:30 PM - 9:00 PM</span>
-                        </div>
-                        <p class="event-card__text">Kick-off session for our 12-week Leadership Excellence program. Orientation, team introductions, and first module.</p>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <div class="event-card__date">
-                        <span class="event-card__day">05</span>
-                        <span class="event-card__month">Apr</span>
-                    </div>
-                    <div class="event-card__content">
-                        <h4 class="event-card__title">Networking Breakfast: Business Leaders</h4>
-                        <div class="event-card__meta">
-                            <span>📍 Local Restaurant (TBA)</span>
-                            <span>🕐 7:30 AM - 9:00 AM</span>
-                        </div>
-                        <p class="event-card__text">Monthly networking breakfast for business owners and professionals. Build connections, share insights, and find collaboration opportunities.</p>
-                    </div>
-                </div>
+            <div class="card" style="text-align: center; padding: 60px; background-color: var(--color-bg-light);">
+                <div style="font-size: 3rem; margin-bottom: 20px;">🗓️</div>
+                <h3 style="color: var(--color-navy); margin-bottom: 16px;">No upcoming events yet</h3>
+                <p style="color: var(--color-text-light); max-width: 500px; margin: 0 auto;">We are currently planning our next series of workshops and summits. Please check back later for updates or subscribe to our newsletter to be notified.</p>
             </div>
         </div>
     </section>
 
     <!-- Regular Programs -->
-    <section class="section">
+    <section class="section section--cream">
         <div class="container">
             <div class="section-header">
                 <span class="section-header__tag">Ongoing</span>
@@ -221,6 +213,92 @@
                     <p class="card__text" style="margin-bottom: 16px;">Weekly gathering for prayer, encouragement, and mutual support among our community members.</p>
                     <p style="color: var(--color-gold); font-weight: 600; font-size: 0.9rem;">Every Wednesday | 12:00 PM</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Past Events Archive -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-header__tag">Our History</span>
+                <h2 class="section-header__title">Past Events Archive</h2>
+                <p class="section-header__text">A look back at the summits and workshops that have shaped our community. Click any image to view full size.</p>
+            </div>
+            <div class="grid grid--3">
+                <!-- Event P6 -->
+                <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                    <img src="assets/events/p6.png" alt="Business Breakfast 2026 Flyer" class="lightbox-trigger" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
+                    <div style="padding: 24px; flex-grow: 1;">
+                        <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-gold); text-transform: uppercase;">Feb 2026</span>
+                        <h4 class="card__title" style="margin-top: 8px; margin-bottom: 12px;">Business Breakfast</h4>
+                        <p class="card__text">Strategies for standing out in the workplace and exploring IT and Real Estate career options with industry experts.</p>
+                    </div>
+                </div>
+                
+                <!-- Event P5 -->
+                <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                    <img src="assets/events/p5.png" alt="Empowered 2022 Summit Flyer" class="lightbox-trigger" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
+                    <div style="padding: 24px; flex-grow: 1;">
+                        <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-gold); text-transform: uppercase;">Oct 2022</span>
+                        <h4 class="card__title" style="margin-top: 8px; margin-bottom: 12px;">Empowered: Thrive</h4>
+                        <p class="card__text">A 2-day personal and business economic summit featuring exhibitions and the launch of the BBVA.</p>
+                    </div>
+                </div>
+
+                <!-- Event P4 -->
+                <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                    <img src="assets/events/p4.png" alt="Wealth Building Real Estate Flyer" class="lightbox-trigger" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
+                    <div style="padding: 24px; flex-grow: 1;">
+                        <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-gold); text-transform: uppercase;">July 2022</span>
+                        <h4 class="card__title" style="margin-top: 8px; margin-bottom: 12px;">Wealth Through Real Estate</h4>
+                        <p class="card__text">Financial smartness and wealth generation strategies for Kingdom building with the Real Estate Wealth Lab.</p>
+                    </div>
+                </div>
+
+                <!-- Event P3 -->
+                <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                    <img src="assets/events/p3.png" alt="Empowered Vision & Innovation Flyer" class="lightbox-trigger" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
+                    <div style="padding: 24px; flex-grow: 1;">
+                        <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-gold); text-transform: uppercase;">June 2021</span>
+                        <h4 class="card__title" style="margin-top: 8px; margin-bottom: 12px;">Vision & Innovation</h4>
+                        <p class="card__text">Online Conference: Economic empowerment through vision, innovation, and creativity with Dr. Daniel Monehin.</p>
+                    </div>
+                </div>
+
+                <!-- Event P2 -->
+                <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                    <img src="assets/events/p2.png" alt="Take Charge 2015 Flyer" class="lightbox-trigger" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
+                    <div style="padding: 24px; flex-grow: 1;">
+                        <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-gold); text-transform: uppercase;">July 2015</span>
+                        <h4 class="card__title" style="margin-top: 8px; margin-bottom: 12px;">Take Charge</h4>
+                        <p class="card__text">Personal development and empowerment sessions featuring Stephen Mandel and Sam Oboh.</p>
+                    </div>
+                </div>
+
+                <!-- Event P1 -->
+                <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                    <img src="assets/events/p1.png" alt="Getting Out of the Rat Race Flyer" class="lightbox-trigger" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
+                    <div style="padding: 24px; flex-grow: 1;">
+                        <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-gold); text-transform: uppercase;">April 2014</span>
+                        <h4 class="card__title" style="margin-top: 8px; margin-bottom: 12px;">Exit the Rat Race</h4>
+                        <p class="card__text">A foundational seminar on work-life balance, money management, and career advancement.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery from Past Events -->
+    <section class="section section--cream">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-header__tag">Community Moments</span>
+                <h2 class="section-header__title">Gallery from Past Events</h2>
+                <p class="section-header__text">Highlights and memories from our journey.</p>
+            </div>
+            <div class="gallery-grid" id="eventGallery">
+                <!-- Images a1.png to a41.png will be inserted here by JS -->
             </div>
         </div>
     </section>
@@ -284,8 +362,8 @@
             <div class="footer__grid">
                 <div class="footer__brand">
                     <div class="footer__logo">
-                        <div class="footer__logo-icon">D</div>
-                        <div class="footer__logo-text">Daniel's <span>Enterprise</span></div>
+                        <!-- Updated Footer Logo -->
+                        <img src="assets/logo/logo.png" alt="Daniel's Enterprise" style="height: 50px; width: auto; filter: brightness(0) invert(1);">
                     </div>
                     <p class="footer__desc">A kingdom-based platform raising, training and empowering individuals with the right set of tools for their next opportunities.</p>
                 </div>
@@ -328,7 +406,15 @@
         </div>
     </footer>
 
+    <!-- Lightbox Element -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox__close" id="lightboxClose">&times;</span>
+        <img class="lightbox__content" id="lightboxImg" alt="Event Flyer">
+        <div id="lightboxCaption" class="lightbox__caption"></div>
+    </div>
+
     <script>
+        // Navigation Toggle
         const navToggle = document.getElementById('navToggle');
         const mainNav = document.getElementById('mainNav');
         
@@ -341,6 +427,72 @@
                 mainNav.classList.remove('nav--open');
             });
         });
+
+        // Lightbox Logic
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        // Function to attach click listeners to images
+        function attachLightboxListeners() {
+            const triggers = document.querySelectorAll('.lightbox-trigger');
+            triggers.forEach(trigger => {
+                trigger.removeEventListener('click', openLightboxHandler); // Prevent duplicates
+                trigger.addEventListener('click', openLightboxHandler);
+            });
+        }
+
+        function openLightboxHandler(e) {
+            lightbox.style.display = 'block';
+            // Trigger reflow
+            void lightbox.offsetWidth;
+            lightbox.classList.add('open');
+            
+            lightboxImg.src = this.src;
+            lightboxCaption.innerText = this.alt || 'Gallery Image';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            setTimeout(() => {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('open')) {
+                closeLightbox();
+            }
+        });
+
+        // Initial attach for static images
+        attachLightboxListeners();
+
+        // Dynamically load gallery images
+        const galleryContainer = document.getElementById('eventGallery');
+        if (galleryContainer) {
+            const fragment = document.createDocumentFragment();
+            for (let i = 1; i <= 41; i++) {
+                const img = document.createElement('img');
+                img.src = `assets/images/a${i}.png`;
+                img.alt = `Daniel's Enterprise Event Photo ${i}`;
+                img.loading = "lazy"; // Lazy load for performance
+                img.classList.add('lightbox-trigger');
+                fragment.appendChild(img);
+            }
+            galleryContainer.appendChild(fragment);
+            // Re-attach listeners for new dynamic images
+            attachLightboxListeners();
+        }
     </script>
 </body>
 </html>
