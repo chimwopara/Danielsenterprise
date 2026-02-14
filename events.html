@@ -147,6 +147,147 @@
             overflow: hidden; 
         }
 
+        /* Event Detail Modal */
+        .event-modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .event-modal.open {
+            display: block;
+            opacity: 1;
+        }
+        .event-modal__inner {
+            background: #fff;
+            max-width: 800px;
+            margin: 40px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: zoom 0.3s ease;
+        }
+        .event-modal__close {
+            position: absolute;
+            top: 15px; right: 20px;
+            color: #fff;
+            font-size: 36px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 3001;
+            line-height: 1;
+            transition: color 0.3s;
+        }
+        .event-modal__close:hover { color: var(--color-gold); }
+        .event-modal__video {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            background: #000;
+        }
+        .event-modal__video iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+        .event-modal__body {
+            padding: 2rem;
+        }
+        .event-modal__title {
+            font-size: 1.6rem;
+            color: var(--color-navy, #1a2744);
+            margin-bottom: 0.25rem;
+        }
+        .event-modal__date {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--color-gold, #c8a951);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+        .event-modal__desc {
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .event-modal__speakers-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-navy, #1a2744);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--color-gold, #c8a951);
+            padding-bottom: 0.5rem;
+        }
+        .speaker {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid #eee;
+        }
+        .speaker:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .speaker__avatar {
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            background: var(--color-navy, #1a2744);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .speaker__name {
+            font-weight: 700;
+            color: var(--color-navy, #1a2744);
+            margin-bottom: 0.15rem;
+        }
+        .speaker__role {
+            font-size: 0.8rem;
+            color: var(--color-gold, #c8a951);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        .speaker__bio {
+            font-size: 0.88rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        /* Make past event cards clickable */
+        .event-clickable {
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .event-clickable:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+        .event-clickable::after {
+            content: 'Click for details';
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-gold, #c8a951);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .event-modal__inner { margin: 20px 10px; }
+            .speaker { flex-direction: column; align-items: center; text-align: center; }
+        }
+
         /* Gallery Grid Styles */
         .gallery-grid {
             display: grid;
@@ -261,12 +402,6 @@
                     <p class="meta">Sunday | 7:00 PM</p>
                 </div>
 
-                <div class="feature-card-bg" style="background-image: url('assets/images/a36.png');">
-                    <h4 class="card__title">Community Prayer & Support</h4>
-                    <p class="card__text">Weekly gathering for prayer, encouragement, and mutual support among our community members.</p>
-                    <p class="meta">By Appointment</p>
-                </div>
-
             </div>
         </div>
     </section>
@@ -279,17 +414,17 @@
                 <p class="section-header__text">A look back at the summits and workshops that have shaped our community. Click any image to view full size.</p>
             </div>
             <div class="grid grid--3">
-                <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
-                    <img src="assets/events/p6.png" alt="Business Breakfast 2026 Flyer" class="lightbox-trigger" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
+                <div class="card event-clickable" data-event="business-breakfast" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                    <img src="assets/events/p6.png" alt="Business Breakfast 2026 Flyer" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
                     <div style="padding: 24px; flex-grow: 1;">
                         <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-gold); text-transform: uppercase;">Feb 2026</span>
                         <h4 class="card__title" style="margin-top: 8px; margin-bottom: 12px;">Business Breakfast</h4>
                         <p class="card__text">Strategies for standing out in the workplace and exploring IT and Real Estate career options with industry experts.</p>
                     </div>
                 </div>
-                
-                <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
-                    <img src="assets/events/p5.png" alt="Empowered 2022 Summit Flyer" class="lightbox-trigger" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
+
+                <div class="card event-clickable" data-event="empowered-thrive" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                    <img src="assets/events/p5.png" alt="Empowered 2022 Summit Flyer" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
                     <div style="padding: 24px; flex-grow: 1;">
                         <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-gold); text-transform: uppercase;">Oct 2022</span>
                         <h4 class="card__title" style="margin-top: 8px; margin-bottom: 12px;">Empowered: Thrive</h4>
@@ -297,8 +432,8 @@
                     </div>
                 </div>
 
-                <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
-                    <img src="assets/events/p4.png" alt="Wealth Building Real Estate Flyer" class="lightbox-trigger" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
+                <div class="card event-clickable" data-event="wealth-real-estate" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                    <img src="assets/events/p4.png" alt="Wealth Building Real Estate Flyer" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
                     <div style="padding: 24px; flex-grow: 1;">
                         <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-gold); text-transform: uppercase;">July 2022</span>
                         <h4 class="card__title" style="margin-top: 8px; margin-bottom: 12px;">Wealth Through Real Estate</h4>
@@ -306,8 +441,8 @@
                     </div>
                 </div>
 
-                <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
-                    <img src="assets/events/p3.png" alt="Empowered Vision & Innovation Flyer" class="lightbox-trigger" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
+                <div class="card event-clickable" data-event="vision-innovation" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                    <img src="assets/events/p3.png" alt="Empowered Vision & Innovation Flyer" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
                     <div style="padding: 24px; flex-grow: 1;">
                         <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-gold); text-transform: uppercase;">June 2021</span>
                         <h4 class="card__title" style="margin-top: 8px; margin-bottom: 12px;">Vision & Innovation</h4>
@@ -315,8 +450,8 @@
                     </div>
                 </div>
 
-                <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
-                    <img src="assets/events/p2.png" alt="Take Charge 2015 Flyer" class="lightbox-trigger" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
+                <div class="card event-clickable" data-event="take-charge" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                    <img src="assets/events/p2.png" alt="Take Charge 2015 Flyer" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
                     <div style="padding: 24px; flex-grow: 1;">
                         <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-gold); text-transform: uppercase;">July 2015</span>
                         <h4 class="card__title" style="margin-top: 8px; margin-bottom: 12px;">Take Charge</h4>
@@ -324,8 +459,8 @@
                     </div>
                 </div>
 
-                <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
-                    <img src="assets/events/p1.png" alt="Getting Out of the Rat Race Flyer" class="lightbox-trigger" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
+                <div class="card event-clickable" data-event="exit-rat-race" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                    <img src="assets/events/p1.png" alt="Getting Out of the Rat Race Flyer" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
                     <div style="padding: 24px; flex-grow: 1;">
                         <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-gold); text-transform: uppercase;">April 2014</span>
                         <h4 class="card__title" style="margin-top: 8px; margin-bottom: 12px;">Exit the Rat Race</h4>
@@ -335,6 +470,21 @@
             </div>
         </div>
     </section>
+
+    <!-- Event Detail Modal -->
+    <div id="eventModal" class="event-modal">
+        <span class="event-modal__close" id="eventModalClose">&times;</span>
+        <div class="event-modal__inner">
+            <div class="event-modal__video" id="eventModalVideo"></div>
+            <div class="event-modal__body">
+                <div class="event-modal__date" id="eventModalDate"></div>
+                <h2 class="event-modal__title" id="eventModalTitle"></h2>
+                <p class="event-modal__desc" id="eventModalDesc"></p>
+                <h3 class="event-modal__speakers-title">Featured Speakers</h3>
+                <div id="eventModalSpeakers"></div>
+            </div>
+        </div>
+    </div>
 
     <section class="section section--cream">
         <div class="container">
@@ -517,6 +667,135 @@
             if (e.key === 'Escape' && lightbox.classList.contains('open')) {
                 closeLightbox();
             }
+        });
+
+        // --- EVENT MODAL LOGIC ---
+        const eventData = {
+            'business-breakfast': {
+                title: 'Business Breakfast',
+                date: 'February 2026',
+                videoId: 'VIDEO_ID_BB',
+                description: 'An exclusive morning gathering bringing together business professionals and aspiring leaders to explore strategies for standing out in the workplace. This event featured expert-led sessions on IT career pathways and Real Estate investment opportunities, followed by networking over breakfast.',
+                speakers: [
+                    { initials: 'BI', name: 'Bod Idris', role: 'Founder & CEO, Daniel\'s Enterprise', bio: 'A seasoned leader with nearly two decades of experience driving transformation across industries, from AI solutions to financial migrations.' },
+                    { initials: 'EI', name: 'Ed Ikhariale', role: 'Senior IT Business Consultant', bio: 'A Senior IT Business Consultant with a background in Computer Science and Software Engineering, bringing extensive public and private sector experience.' },
+                    { initials: 'AO', name: 'Ade Ogunleye', role: 'IT Career Strategist', bio: 'An industry veteran helping professionals navigate the evolving tech landscape and position themselves for leadership roles in IT.' },
+                    { initials: 'RK', name: 'Rita Kehinde', role: 'Real Estate Investment Advisor', bio: 'A licensed realtor and wealth coach specializing in helping newcomers build generational wealth through strategic property investments.' }
+                ]
+            },
+            'empowered-thrive': {
+                title: 'Empowered: Thrive',
+                date: 'October 2022',
+                videoId: 'VIDEO_ID_ET',
+                description: 'A landmark 2-day personal and business economic summit that brought together hundreds of marketplace leaders. The event featured exhibitions, workshops, keynote addresses, and the official launch of the BBVA (Black Business Venture Alliance), creating a platform for economic empowerment and collaboration.',
+                speakers: [
+                    { initials: 'BI', name: 'Bod Idris', role: 'Founder & CEO, Daniel\'s Enterprise', bio: 'Visionary leader passionate about unlocking untapped potential and empowering marketplace leaders to achieve breakthrough results.' },
+                    { initials: 'DM', name: 'Dr. Daniel Monehin', role: 'Keynote Speaker & Business Strategist', bio: 'A globally recognized business executive and former Mastercard VP, known for championing economic inclusion and financial literacy across Africa and the diaspora.' },
+                    { initials: 'FO', name: 'Funke Olotu', role: 'Entrepreneurship Coach', bio: 'Award-winning entrepreneur and business coach who has helped launch over 50 small businesses across Western Canada.' },
+                    { initials: 'JA', name: 'Joseph Adebayo', role: 'Financial Literacy Expert', bio: 'Certified financial planner dedicated to helping immigrant families achieve financial independence through smart money management.' }
+                ]
+            },
+            'wealth-real-estate': {
+                title: 'Wealth Through Real Estate',
+                date: 'July 2022',
+                videoId: 'VIDEO_ID_WR',
+                description: 'A focused workshop on financial smartness and wealth generation strategies for Kingdom building, presented in partnership with the Real Estate Wealth Lab. Attendees learned practical approaches to property investment, mortgage strategies, and building a real estate portfolio from scratch.',
+                speakers: [
+                    { initials: 'BI', name: 'Bod Idris', role: 'Host & Moderator', bio: 'Bringing together top real estate minds to equip community members with practical wealth-building knowledge.' },
+                    { initials: 'TO', name: 'Tunde Obaseki', role: 'Real Estate Wealth Lab Founder', bio: 'A prolific real estate investor who built a multi-million dollar portfolio from humble beginnings, now teaching others to do the same.' },
+                    { initials: 'NE', name: 'Ngozi Emenike', role: 'Mortgage Specialist', bio: 'Licensed mortgage broker specializing in helping first-time buyers and investors secure favorable financing for their property goals.' }
+                ]
+            },
+            'vision-innovation': {
+                title: 'Vision & Innovation',
+                date: 'June 2021',
+                videoId: 'VIDEO_ID_VI',
+                description: 'An inspiring online conference focused on economic empowerment through vision, innovation, and creativity. Held virtually during the pandemic, this event connected participants across the globe with world-class speakers who shared strategies for thriving in uncertain times.',
+                speakers: [
+                    { initials: 'DM', name: 'Dr. Daniel Monehin', role: 'Keynote Speaker', bio: 'Former Mastercard Vice President and global business strategist, Dr. Monehin shared insights on leveraging innovation for economic advancement in the digital age.' },
+                    { initials: 'BI', name: 'Bod Idris', role: 'Host & Visionary Leader', bio: 'Convened global thought leaders to inspire and equip the Daniel\'s Enterprise community during challenging times.' },
+                    { initials: 'SA', name: 'Sola Akinwale', role: 'Tech Innovation Speaker', bio: 'Serial tech entrepreneur and innovation consultant helping businesses leverage emerging technologies for competitive advantage.' }
+                ]
+            },
+            'take-charge': {
+                title: 'Take Charge',
+                date: 'July 2015',
+                videoId: 'VIDEO_ID_TC',
+                description: 'A powerful personal development and empowerment event that featured prominent Edmonton leaders. This summit encouraged attendees to take ownership of their personal growth, career trajectory, and community involvement through actionable strategies and inspiring testimonies.',
+                speakers: [
+                    { initials: 'SM', name: 'Stephen Mandel', role: 'Former Mayor of Edmonton', bio: 'Served as Mayor of Edmonton from 2004 to 2013, known for his vision of making Edmonton a world-class city and his commitment to community empowerment.' },
+                    { initials: 'SO', name: 'Sam Oboh', role: 'Architect & Community Leader', bio: 'Award-winning architect, past president of the Royal Architectural Institute of Canada, and passionate advocate for diversity and inclusion in professional fields.' },
+                    { initials: 'BI', name: 'Bod Idris', role: 'Founder & CEO, Daniel\'s Enterprise', bio: 'Organized this landmark event to connect community members with influential leaders and practical empowerment strategies.' }
+                ]
+            },
+            'exit-rat-race': {
+                title: 'Exit the Rat Race',
+                date: 'April 2014',
+                videoId: 'VIDEO_ID_ER',
+                description: 'The foundational seminar that helped establish Daniel\'s Enterprise as a platform for marketplace empowerment. This inaugural event tackled work-life balance, money management, and career advancement, inspiring attendees to break free from the cycle of working without purpose.',
+                speakers: [
+                    { initials: 'BI', name: 'Bod Idris', role: 'Founder & CEO, Daniel\'s Enterprise', bio: 'Launched Daniel\'s Enterprise with this seminal event, sharing his vision for a kingdom-based platform that equips individuals to dominate in the marketplace.' },
+                    { initials: 'KO', name: 'Kenneth Obi', role: 'Financial Freedom Coach', bio: 'A certified financial coach who escaped the corporate rat race himself and now teaches others practical strategies for financial independence.' }
+                ]
+            }
+        };
+
+        // Event Modal Elements
+        const eventModal = document.getElementById('eventModal');
+        const eventModalClose = document.getElementById('eventModalClose');
+        const eventModalVideo = document.getElementById('eventModalVideo');
+        const eventModalDate = document.getElementById('eventModalDate');
+        const eventModalTitle = document.getElementById('eventModalTitle');
+        const eventModalDesc = document.getElementById('eventModalDesc');
+        const eventModalSpeakers = document.getElementById('eventModalSpeakers');
+
+        // Open event modal
+        document.querySelectorAll('.event-clickable').forEach(card => {
+            card.addEventListener('click', function(e) {
+                const eventKey = this.dataset.event;
+                const data = eventData[eventKey];
+                if (!data) return;
+
+                eventModalVideo.innerHTML = '<iframe src="https://www.youtube.com/embed/' + data.videoId + '" title="' + data.title + ' - Event Highlights" allowfullscreen loading="lazy"></iframe>';
+                eventModalDate.textContent = data.date;
+                eventModalTitle.textContent = data.title;
+                eventModalDesc.textContent = data.description;
+
+                let speakersHTML = '';
+                data.speakers.forEach(s => {
+                    speakersHTML += '<div class="speaker">' +
+                        '<div class="speaker__avatar">' + s.initials + '</div>' +
+                        '<div>' +
+                            '<div class="speaker__name">' + s.name + '</div>' +
+                            '<div class="speaker__role">' + s.role + '</div>' +
+                            '<div class="speaker__bio">' + s.bio + '</div>' +
+                        '</div>' +
+                    '</div>';
+                });
+                eventModalSpeakers.innerHTML = speakersHTML;
+
+                eventModal.style.display = 'block';
+                void eventModal.offsetWidth;
+                eventModal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Close event modal
+        function closeEventModal() {
+            eventModal.classList.remove('open');
+            setTimeout(() => {
+                eventModal.style.display = 'none';
+                eventModalVideo.innerHTML = '';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+        eventModalClose.addEventListener('click', closeEventModal);
+        eventModal.addEventListener('click', function(e) {
+            if (e.target === eventModal) closeEventModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && eventModal.classList.contains('open')) closeEventModal();
         });
 
         // --- NEW GALLERY LOADING LOGIC ---
