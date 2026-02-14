@@ -6,14 +6,83 @@
     <title>Daniel's Enterprise | Empowering Marketplace Leaders</title>
     <meta name="description" content="A kingdom-based platform raising, training and empowering individuals with the right set of tools for their next opportunities.">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+    <link rel="icon" href="logo.png">
+    
+    <style>
+        /* INLINE STYLES FOR THE REQUESTED UPDATES */
+        
+        /* Feature Cards as Backgrounds */
+        .feature-card-bg {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            z-index: 1;
+            color: #ffffff; /* White text for contrast */
+            padding: 3rem 2rem; /* More padding for impact */
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Align text to bottom like a poster */
+        }
+
+        .feature-card-bg:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark overlay to make text readable on top of images */
+        .feature-card-bg::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.3));
+            z-index: -1;
+        }
+
+        .feature-card-bg h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card-bg p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+        }
+
+        /* Leadership Portraits - UPDATED ALIGNMENT */
+        .leader-portrait {
+            display: block; /* Ensures margin auto works */
+            width: 100%;
+            max-width: 350px;
+            aspect-ratio: 3/4; /* Standard portrait ratio */
+            object-fit: cover;
+            border-radius: 12px; /* Slight rounding, not circle */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            margin: 0 auto 1.5rem auto; /* Centers the image horizontally */
+        }
+        
+        /* Link styling for Bod's name */
+        .leader-link {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+        .leader-link:hover {
+            border-bottom-color: currentColor;
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="header__inner">
             <a href="index.html" class="logo">
-                <div class="logo__icon">D</div>
+                <img src="logo.png" alt="Daniel's Enterprise Logo" style="height: 2.5rem; width: auto; margin-right: 0.5rem;">
                 <div class="logo__text">Daniel's <span>Enterprise</span></div>
             </a>
             <nav class="nav" id="mainNav">
@@ -32,7 +101,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero__content">
@@ -47,7 +115,6 @@
         </div>
     </section>
 
-    <!-- Features Section -->
     <section class="section">
         <div class="container">
             <div class="section-header">
@@ -55,19 +122,19 @@
                 <h2 class="section-header__title">Building Tomorrow's Leaders</h2>
                 <p class="section-header__text">Balanced, practical programs designed to equip you with skills that matter in today's competitive marketplace.</p>
             </div>
-            <div class="features">
-                <div class="feature">
-                    <div class="feature__icon">💼</div>
+            
+            <div class="grid grid--3" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="feature-card-bg" style="background-image: url('assets/images/a13.png');">
                     <h3 class="feature__title">Business Leaders</h3>
                     <p class="feature__text">Strategic training for entrepreneurs and business professionals ready to scale their impact and lead with excellence.</p>
                 </div>
-                <div class="feature">
-                    <div class="feature__icon">🔧</div>
+
+                <div class="feature-card-bg" style="background-image: url('assets/images/a27.png');">
                     <h3 class="feature__title">Trades Professionals</h3>
                     <p class="feature__text">Practical skills development and certification support for trades workers looking to advance their careers.</p>
                 </div>
-                <div class="feature">
-                    <div class="feature__icon">🌟</div>
+
+                <div class="feature-card-bg" style="background-image: url('assets/images/a32.png');">
                     <h3 class="feature__title">Youth Development</h3>
                     <p class="feature__text">Mentorship and training programs preparing the next generation with foundational skills for success.</p>
                 </div>
@@ -75,7 +142,6 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
     <section class="section section--navy">
         <div class="container">
             <div class="stats">
@@ -99,7 +165,6 @@
         </div>
     </section>
 
-    <!-- Mission Preview -->
     <section class="section section--cream">
         <div class="container">
             <div class="two-col">
@@ -123,7 +188,37 @@
         </div>
     </section>
 
-    <!-- Testimonial Preview -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-header__tag">Leadership</span>
+                <h2 class="section-header__title">Meet the Team</h2>
+            </div>
+            
+            <div class="grid grid--2" style="align-items: start;">
+                <div class="leader-card" style="text-align: center; padding: 20px;">
+                    <img src="assets/people/ceo.png" alt="Bod Idris" class="leader-portrait">
+                    <h3 style="font-size: 1.5rem; color: var(--color-primary, #333); margin-bottom: 0.2rem;">
+                        <a href="https://bodidris.org" target="_blank" class="leader-link">Bod Idris</a>
+                    </h3>
+                    <p style="font-weight: 600; color: #666; margin-bottom: 1.5rem;">Founder & CEO</p>
+                    <p style="margin-bottom: 1.5rem;">
+                        For nearly two decades, Bod has partnered with visionary leaders to drive transformation and achieve breakthrough results. From delivering massive AI solutions to spearheading historic financial migrations, his expertise is proven on the global stage. Yet, his true passion lies in unlocking untapped potential.
+                    </p>
+                    </div>
+
+                <div class="leader-card" style="text-align: center; padding: 20px;">
+                    <img src="assets/people/ed.png" alt="Ed" class="leader-portrait">
+                    <h3 style="font-size: 1.5rem; color: var(--color-primary, #333); margin-bottom: 0.2rem;">Ed</h3>
+                    <p style="font-weight: 600; color: #666; margin-bottom: 1.5rem;">Senior IT Business Consultant</p>
+                    <p style="margin-bottom: 1.5rem;">
+                        Ed is a Senior IT Business Consultant with a background in Computer Science and Software Engineering. He has extensive experience in public and private sector spanning different industries.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="section">
         <div class="container">
             <div class="section-header">
@@ -158,7 +253,6 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
     <section class="cta">
         <div class="container">
             <div class="cta__content">
@@ -172,13 +266,12 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer__grid">
                 <div class="footer__brand">
                     <div class="footer__logo">
-                        <div class="footer__logo-icon">D</div>
+                        <img src="logo.png" alt="Daniel's Enterprise Logo" style="height: 2.5rem; width: auto; margin-right: 0.5rem;">
                         <div class="footer__logo-text">Daniel's <span>Enterprise</span></div>
                     </div>
                     <p class="footer__desc">A kingdom-based platform raising, training and empowering individuals with the right set of tools for their next opportunities.</p>

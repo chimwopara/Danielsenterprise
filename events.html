@@ -6,9 +6,61 @@
     <title>Events & Calendar | Daniel's Enterprise</title>
     <meta name="description" content="View upcoming events, workshops, and training sessions at Daniel's Enterprise.">
     <link rel="stylesheet" href="styles.css">
-    <!-- Updated Favicon -->
     <link rel="icon" href="assets/logo/logo.png">
     <style>
+        /* Feature Cards as Backgrounds (Matches Home Page) */
+        .feature-card-bg {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            z-index: 1;
+            color: #ffffff; /* White text for contrast */
+            padding: 3rem 2rem; /* More padding for impact */
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+            height: 300px; /* Fixed height for consistency */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Align text to bottom like a poster */
+        }
+
+        .feature-card-bg:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Dark overlay to make text readable on top of images */
+        .feature-card-bg::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2));
+            z-index: -1;
+        }
+
+        .feature-card-bg h4 {
+            color: #fff;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .feature-card-bg p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card-bg .meta {
+            color: var(--color-gold);
+            font-weight: 600; 
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         /* Lightbox Styles */
         .lightbox {
             display: none;
@@ -109,6 +161,12 @@
             object-fit: cover;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @media (min-width: 768px) {
@@ -122,11 +180,9 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="header__inner">
             <a href="index.html" class="logo">
-                <!-- Header Logo -->
                 <img src="assets/logo/logo.png" alt="Daniel's Enterprise" style="height: 50px; width: auto;">
             </a>
             <nav class="nav" id="mainNav">
@@ -145,7 +201,6 @@
         </div>
     </header>
 
-    <!-- Page Header -->
     <section class="page-header">
         <div class="container">
             <h1 class="page-header__title">Events & Calendar</h1>
@@ -153,7 +208,6 @@
         </div>
     </section>
 
-    <!-- Upcoming Events (Empty State) -->
     <section class="section">
         <div class="container">
             <div class="section-header">
@@ -168,7 +222,6 @@
         </div>
     </section>
 
-    <!-- Regular Programs -->
     <section class="section section--cream">
         <div class="container">
             <div class="section-header">
@@ -177,47 +230,47 @@
                 <p class="section-header__text">These recurring events and sessions are part of our regular schedule</p>
             </div>
             <div class="grid grid--3">
-                <div class="card">
-                    <div class="card__icon">📅</div>
-                    <h4 class="card__title">Weekly Mentorship Sessions</h4>
-                    <p class="card__text" style="margin-bottom: 16px;">One-on-one mentorship meetings scheduled weekly between mentors and mentees in our programs.</p>
-                    <p style="color: var(--color-gold); font-weight: 600; font-size: 0.9rem;">Every Week | By Appointment</p>
+                
+                <div class="feature-card-bg" style="background-image: url('assets/images/a30.png');">
+                    <h4 class="card__title">On-Demand Mentorship Sessions</h4>
+                    <p class="card__text">One-on-one mentorship meetings scheduled between mentors and mentees in our programs.</p>
+                    <p class="meta">By Appointment</p>
                 </div>
-                <div class="card">
-                    <div class="card__icon">🍳</div>
-                    <h4 class="card__title">Monthly Networking Breakfast</h4>
-                    <p class="card__text" style="margin-bottom: 16px;">First Saturday of each month, business leaders gather for breakfast, networking, and brief presentations.</p>
-                    <p style="color: var(--color-gold); font-weight: 600; font-size: 0.9rem;">First Saturday | 7:30 AM</p>
+
+                <div class="feature-card-bg" style="background-image: url('assets/images/b5.png');">
+                    <h4 class="card__title">Seasonal Networking Breakfast</h4>
+                    <p class="card__text">Business leaders gather for breakfast, networking, and brief presentations.</p>
+                    <p class="meta">Check Calendar</p>
                 </div>
-                <div class="card">
-                    <div class="card__icon">🛠️</div>
-                    <h4 class="card__title">Trades Skills Workshops</h4>
-                    <p class="card__text" style="margin-bottom: 16px;">Bi-weekly hands-on workshops covering specific skills, safety updates, and industry best practices.</p>
-                    <p style="color: var(--color-gold); font-weight: 600; font-size: 0.9rem;">Every Other Saturday | 9:00 AM</p>
+
+                <div class="feature-card-bg" style="background-image: url('assets/images/b4.png');">
+                    <h4 class="card__title">Seasonal Trades Skills Workshops</h4>
+                    <p class="card__text">Hands-on workshops covering specific skills, safety updates, and industry best practices.</p>
+                    <p class="meta">Check Calendar</p>
                 </div>
-                <div class="card">
-                    <div class="card__icon">🌟</div>
+
+                <div class="feature-card-bg" style="background-image: url('assets/images/b6.png');">
                     <h4 class="card__title">Youth Group Meetings</h4>
-                    <p class="card__text" style="margin-bottom: 16px;">Weekly gatherings for young people in our programs featuring workshops, discussions, and team activities.</p>
-                    <p style="color: var(--color-gold); font-weight: 600; font-size: 0.9rem;">Every Thursday | 6:00 PM</p>
+                    <p class="card__text">Gatherings for young people in our programs featuring workshops, discussions, and team activities.</p>
+                    <p class="meta">Sunday | 7:00 PM</p>
                 </div>
-                <div class="card">
-                    <div class="card__icon">📖</div>
+
+                <div class="feature-card-bg" style="background-image: url('assets/images/a18.png');">
                     <h4 class="card__title">Business Book Club</h4>
-                    <p class="card__text" style="margin-bottom: 16px;">Monthly book discussions on leadership, business, and personal development topics.</p>
-                    <p style="color: var(--color-gold); font-weight: 600; font-size: 0.9rem;">Third Tuesday | 7:00 PM</p>
+                    <p class="card__text">Monthly book discussions on leadership, business, and personal development topics.</p>
+                    <p class="meta">Sunday | 7:00 PM</p>
                 </div>
-                <div class="card">
-                    <div class="card__icon">🙏</div>
+
+                <div class="feature-card-bg" style="background-image: url('assets/images/a36.png');">
                     <h4 class="card__title">Community Prayer & Support</h4>
-                    <p class="card__text" style="margin-bottom: 16px;">Weekly gathering for prayer, encouragement, and mutual support among our community members.</p>
-                    <p style="color: var(--color-gold); font-weight: 600; font-size: 0.9rem;">Every Wednesday | 12:00 PM</p>
+                    <p class="card__text">Weekly gathering for prayer, encouragement, and mutual support among our community members.</p>
+                    <p class="meta">By Appointment</p>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Past Events Archive -->
     <section class="section">
         <div class="container">
             <div class="section-header">
@@ -226,7 +279,6 @@
                 <p class="section-header__text">A look back at the summits and workshops that have shaped our community. Click any image to view full size.</p>
             </div>
             <div class="grid grid--3">
-                <!-- Event P6 -->
                 <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
                     <img src="assets/events/p6.png" alt="Business Breakfast 2026 Flyer" class="lightbox-trigger" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
                     <div style="padding: 24px; flex-grow: 1;">
@@ -236,7 +288,6 @@
                     </div>
                 </div>
                 
-                <!-- Event P5 -->
                 <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
                     <img src="assets/events/p5.png" alt="Empowered 2022 Summit Flyer" class="lightbox-trigger" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
                     <div style="padding: 24px; flex-grow: 1;">
@@ -246,7 +297,6 @@
                     </div>
                 </div>
 
-                <!-- Event P4 -->
                 <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
                     <img src="assets/events/p4.png" alt="Wealth Building Real Estate Flyer" class="lightbox-trigger" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
                     <div style="padding: 24px; flex-grow: 1;">
@@ -256,7 +306,6 @@
                     </div>
                 </div>
 
-                <!-- Event P3 -->
                 <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
                     <img src="assets/events/p3.png" alt="Empowered Vision & Innovation Flyer" class="lightbox-trigger" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
                     <div style="padding: 24px; flex-grow: 1;">
@@ -266,7 +315,6 @@
                     </div>
                 </div>
 
-                <!-- Event P2 -->
                 <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
                     <img src="assets/events/p2.png" alt="Take Charge 2015 Flyer" class="lightbox-trigger" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
                     <div style="padding: 24px; flex-grow: 1;">
@@ -276,7 +324,6 @@
                     </div>
                 </div>
 
-                <!-- Event P1 -->
                 <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
                     <img src="assets/events/p1.png" alt="Getting Out of the Rat Race Flyer" class="lightbox-trigger" style="width: 100%; height: 250px; object-fit: cover; object-position: top center;">
                     <div style="padding: 24px; flex-grow: 1;">
@@ -289,7 +336,6 @@
         </div>
     </section>
 
-    <!-- Gallery from Past Events -->
     <section class="section section--cream">
         <div class="container">
             <div class="section-header">
@@ -298,12 +344,14 @@
                 <p class="section-header__text">Highlights and memories from our journey.</p>
             </div>
             <div class="gallery-grid" id="eventGallery">
-                <!-- Images a1.png to a41.png will be inserted here by JS -->
+                </div>
+            
+            <div class="text-center mt-40" id="viewMoreContainer" style="display: none;">
+                <button id="viewMoreBtn" class="btn btn--outline" style="min-width: 200px;">View More Photos</button>
             </div>
         </div>
     </section>
 
-    <!-- Subscribe to Updates -->
     <section class="section section--navy">
         <div class="container">
             <div class="two-col">
@@ -325,7 +373,6 @@
         </div>
     </section>
 
-    <!-- Host an Event -->
     <section class="section">
         <div class="container">
             <div class="section-header">
@@ -334,21 +381,22 @@
                 <p class="section-header__text">Interested in hosting a workshop, speaking at an event, or sponsoring our programs? We'd love to partner with you.</p>
             </div>
             <div class="grid grid--3">
-                <div class="card" style="text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 16px;">🎤</div>
+                
+                <div class="feature-card-bg" style="background-image: url('assets/images/b2.png');">
                     <h4 class="card__title">Speak at an Event</h4>
                     <p class="card__text">Share your expertise with our community as a workshop facilitator or guest speaker.</p>
                 </div>
-                <div class="card" style="text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 16px;">🏢</div>
+
+                <div class="feature-card-bg" style="background-image: url('assets/images/a34.png');">
                     <h4 class="card__title">Host a Workshop</h4>
                     <p class="card__text">Provide your venue or resources to host one of our training sessions or community events.</p>
                 </div>
-                <div class="card" style="text-align: center;">
-                    <div style="font-size: 2.5rem; margin-bottom: 16px;">🤝</div>
+
+                <div class="feature-card-bg" style="background-image: url('assets/images/a7.png');">
                     <h4 class="card__title">Become a Sponsor</h4>
                     <p class="card__text">Support our events financially and gain visibility while investing in community development.</p>
                 </div>
+                
             </div>
             <div class="text-center mt-40">
                 <a href="contact.html" class="btn btn--primary">Get in Touch</a>
@@ -356,14 +404,12 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer__grid">
                 <div class="footer__brand">
                     <div class="footer__logo">
-                        <!-- Updated Footer Logo -->
-                        <img src="assets/logo/logo.png" alt="Daniel's Enterprise" style="height: 50px; width: auto; filter: brightness(0) invert(1);">
+                        <img src="assets/logo/logo.png" alt="Daniel's Enterprise" style="height: 50px; width: auto;">
                     </div>
                     <p class="footer__desc">A kingdom-based platform raising, training and empowering individuals with the right set of tools for their next opportunities.</p>
                 </div>
@@ -406,7 +452,6 @@
         </div>
     </footer>
 
-    <!-- Lightbox Element -->
     <div id="lightbox" class="lightbox">
         <span class="lightbox__close" id="lightboxClose">&times;</span>
         <img class="lightbox__content" id="lightboxImg" alt="Event Flyer">
@@ -474,24 +519,54 @@
             }
         });
 
-        // Initial attach for static images
-        attachLightboxListeners();
-
-        // Dynamically load gallery images
+        // --- NEW GALLERY LOADING LOGIC ---
         const galleryContainer = document.getElementById('eventGallery');
-        if (galleryContainer) {
+        const viewMoreContainer = document.getElementById('viewMoreContainer');
+        const viewMoreBtn = document.getElementById('viewMoreBtn');
+        
+        let currentImageIndex = 0;
+        const totalImages = 41;
+
+        function loadImages(count) {
+            if (!galleryContainer) return;
+            
             const fragment = document.createDocumentFragment();
-            for (let i = 1; i <= 41; i++) {
+            const start = currentImageIndex + 1;
+            const end = Math.min(currentImageIndex + count, totalImages);
+            
+            for (let i = start; i <= end; i++) {
                 const img = document.createElement('img');
                 img.src = `assets/images/a${i}.png`;
                 img.alt = `Daniel's Enterprise Event Photo ${i}`;
-                img.loading = "lazy"; // Lazy load for performance
+                img.loading = "lazy";
                 img.classList.add('lightbox-trigger');
                 fragment.appendChild(img);
             }
+            
             galleryContainer.appendChild(fragment);
+            currentImageIndex = end;
+            
             // Re-attach listeners for new dynamic images
             attachLightboxListeners();
+            
+            // Manage button visibility
+            if (currentImageIndex >= totalImages) {
+                viewMoreContainer.style.display = 'none';
+            } else {
+                viewMoreContainer.style.display = 'block';
+            }
+        }
+
+        // Initial Load
+        if (galleryContainer) {
+            loadImages(5); // Load first 5
+            
+            // Button Listener
+            if (viewMoreBtn) {
+                viewMoreBtn.addEventListener('click', () => {
+                    loadImages(10); // Load 10 more
+                });
+            }
         }
     </script>
 </body>
